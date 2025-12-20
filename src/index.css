@@ -6,54 +6,81 @@
 
 @layer base {
   :root {
-    --background: 220 20% 7%;
+    --background: 340 35% 12%;
     --foreground: 210 20% 95%;
 
-    --card: 220 18% 10%;
+    --card: 340 30% 15%;
     --card-foreground: 210 20% 95%;
 
-    --popover: 220 18% 10%;
+    --popover: 340 30% 15%;
     --popover-foreground: 210 20% 95%;
 
-    --primary: 175 80% 45%;
-    --primary-foreground: 220 20% 7%;
+    --primary: 185 85% 55%;
+    --primary-foreground: 340 35% 12%;
 
-    --secondary: 220 15% 15%;
+    --secondary: 340 25% 18%;
     --secondary-foreground: 210 20% 85%;
 
-    --muted: 220 15% 18%;
-    --muted-foreground: 215 15% 55%;
+    --muted: 340 20% 20%;
+    --muted-foreground: 340 15% 55%;
 
-    --accent: 175 70% 40%;
-    --accent-foreground: 220 20% 7%;
+    --accent: 185 80% 50%;
+    --accent-foreground: 340 35% 12%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 210 20% 98%;
 
-    --success: 145 70% 45%;
-    --success-foreground: 220 20% 7%;
+    --success: 160 70% 45%;
+    --success-foreground: 340 35% 12%;
 
     --warning: 35 90% 55%;
-    --warning-foreground: 220 20% 7%;
+    --warning-foreground: 340 35% 12%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 18%;
-    --ring: 175 80% 45%;
+    --border: 340 20% 22%;
+    --input: 340 20% 20%;
+    --ring: 185 85% 55%;
 
     --radius: 0.5rem;
 
     --font-sans: 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    --glow-primary: 0 0 20px hsl(175 80% 45% / 0.4);
-    --glow-success: 0 0 15px hsl(145 70% 45% / 0.5);
+    --glow-primary: 0 0 25px hsl(185 85% 55% / 0.5);
+    --glow-success: 0 0 20px hsl(160 70% 45% / 0.5);
     --glow-destructive: 0 0 15px hsl(0 70% 50% / 0.5);
   }
 
   .dark {
-    --background: 220 20% 7%;
+    --background: 340 35% 12%;
     --foreground: 210 20% 95%;
   }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(185 85% 55% / 0.4); }
+  50% { box-shadow: 0 0 35px hsl(185 85% 55% / 0.7); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
 }
 
 @layer base {

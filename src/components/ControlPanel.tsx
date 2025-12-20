@@ -1,16 +1,9 @@
 import React from 'react';
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Volume2, VolumeX, Camera, CameraOff, Globe } from 'lucide-react';
+import { Volume2, VolumeX, Camera, CameraOff } from 'lucide-react';
 import type { Language } from '@/lib/i18n';
-import { t, languageNames, isRTL } from '@/lib/i18n';
+import { t, isRTL } from '@/lib/i18n';
 
 interface ControlPanelProps {
   lang: Language;
@@ -20,7 +13,6 @@ interface ControlPanelProps {
   isCameraActive: boolean;
   personsCount: number;
   activePersonsCount: number;
-  onLanguageChange: (lang: Language) => void;
   onSensitivityChange: (value: number) => void;
   onThresholdChange: (value: number) => void;
   onMuteToggle: () => void;
@@ -35,7 +27,6 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   isCameraActive,
   personsCount,
   activePersonsCount,
-  onLanguageChange,
   onSensitivityChange,
   onThresholdChange,
   onMuteToggle,
@@ -45,26 +36,6 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
 
   return (
     <div className={`control-panel space-y-5 ${rtl ? 'rtl' : ''}`}>
-      {/* Language Selector */}
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Globe className="w-4 h-4" />
-          <span className="text-sm font-medium">{t(lang, 'language')}</span>
-        </div>
-        <Select value={lang} onValueChange={(v) => onLanguageChange(v as Language)}>
-          <SelectTrigger className="w-32 bg-secondary border-border">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {Object.entries(languageNames).map(([code, name]) => (
-              <SelectItem key={code} value={code}>
-                {name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
       {/* Persons Count */}
       <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
         <span className="text-sm text-muted-foreground">{t(lang, 'persons')}</span>
@@ -72,9 +43,9 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
       </div>
 
       {/* Active Persons Count */}
-      <div className="flex items-center justify-between p-3 bg-active/20 rounded-lg border border-active/30">
+      <div className="flex items-center justify-between p-3 bg-success/20 rounded-lg border border-success/30">
         <span className="text-sm text-muted-foreground">{t(lang, 'activePersons')}</span>
-        <span className="font-mono text-lg font-semibold text-active">{activePersonsCount}</span>
+        <span className="font-mono text-lg font-semibold text-success">{activePersonsCount}</span>
       </div>
 
       {/* Sensitivity Slider */}
