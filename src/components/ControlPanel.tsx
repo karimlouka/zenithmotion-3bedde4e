@@ -102,14 +102,17 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         <div className="flex justify-between items-center">
           <span className="text-sm font-medium text-foreground">{t(lang, 'threshold')}</span>
           <span className="font-mono text-xs text-muted-foreground">
-            {inactivityThreshold} {t(lang, 'seconds')}
+            {inactivityThreshold >= 60 
+              ? `${Math.floor(inactivityThreshold / 60)}:${(inactivityThreshold % 60).toString().padStart(2, '0')} ${t(lang, 'minutes')}`
+              : `${inactivityThreshold} ${t(lang, 'seconds')}`
+            }
           </span>
         </div>
         <Slider
           value={[inactivityThreshold]}
           onValueChange={([v]) => onThresholdChange(v)}
           min={3}
-          max={60}
+          max={300}
           step={1}
           className="w-full"
         />
