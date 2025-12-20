@@ -12,6 +12,7 @@ const Index: React.FC = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [personsCount, setPersonsCount] = useState(0);
+  const [activePersonsCount, setActivePersonsCount] = useState(0);
 
   const rtl = isRTL(lang);
 
@@ -49,7 +50,10 @@ const Index: React.FC = () => {
               inactivityThreshold={inactivityThreshold}
               isMuted={isMuted}
               isCameraActive={isCameraActive}
-              onPersonsChange={setPersonsCount}
+              onPersonsChange={(count, activeCount) => {
+                setPersonsCount(count);
+                setActivePersonsCount(activeCount);
+              }}
               onCameraError={handleCameraError}
             />
           </div>
@@ -63,6 +67,7 @@ const Index: React.FC = () => {
               isMuted={isMuted}
               isCameraActive={isCameraActive}
               personsCount={personsCount}
+              activePersonsCount={activePersonsCount}
               onLanguageChange={setLang}
               onSensitivityChange={setSensitivity}
               onThresholdChange={setInactivityThreshold}

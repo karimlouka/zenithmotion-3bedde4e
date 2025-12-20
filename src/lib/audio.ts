@@ -19,27 +19,35 @@ export const playAlertSound = (muted: boolean): void => {
       ctx.resume();
     }
 
-    const oscillator = ctx.createOscillator();
-    const gainNode = ctx.createGain();
+    // Create a powerful, attention-getting alarm sound
+    const playTone = (startTime: number, freq: number, duration: number) => {
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
 
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
 
-    // Create a pleasant but attention-getting alert tone
-    oscillator.frequency.setValueAtTime(880, ctx.currentTime); // A5
-    oscillator.frequency.setValueAtTime(660, ctx.currentTime + 0.1); // E5
-    oscillator.frequency.setValueAtTime(880, ctx.currentTime + 0.2); // A5
+      oscillator.frequency.setValueAtTime(freq, startTime);
+      oscillator.type = 'square'; // Harsher, more attention-getting sound
 
-    oscillator.type = 'sine';
+      // Loud envelope
+      gainNode.gain.setValueAtTime(0, startTime);
+      gainNode.gain.linearRampToValueAtTime(0.5, startTime + 0.02);
+      gainNode.gain.setValueAtTime(0.5, startTime + duration - 0.02);
+      gainNode.gain.linearRampToValueAtTime(0, startTime + duration);
 
-    // Envelope for smooth sound
-    gainNode.gain.setValueAtTime(0, ctx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.02);
-    gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.15);
-    gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+      oscillator.start(startTime);
+      oscillator.stop(startTime + duration);
+    };
 
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + 0.3);
+    // Play a 3-beep alarm pattern (loud and clear)
+    const now = ctx.currentTime;
+    playTone(now, 1000, 0.15);        // First beep - high
+    playTone(now + 0.2, 800, 0.15);   // Second beep - medium
+    playTone(now + 0.4, 1000, 0.15);  // Third beep - high
+    playTone(now + 0.6, 800, 0.15);   // Fourth beep - medium
+    playTone(now + 0.8, 1200, 0.25);  // Final long beep - highest
+
   } catch (error) {
     console.warn('Audio playback failed:', error);
   }
