@@ -19,6 +19,7 @@ interface ControlPanelProps {
   isMuted: boolean;
   isCameraActive: boolean;
   personsCount: number;
+  activePersonsCount: number;
   onLanguageChange: (lang: Language) => void;
   onSensitivityChange: (value: number) => void;
   onThresholdChange: (value: number) => void;
@@ -33,6 +34,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   isMuted,
   isCameraActive,
   personsCount,
+  activePersonsCount,
   onLanguageChange,
   onSensitivityChange,
   onThresholdChange,
@@ -67,6 +69,12 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
       <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
         <span className="text-sm text-muted-foreground">{t(lang, 'persons')}</span>
         <span className="font-mono text-lg font-semibold text-primary">{personsCount}</span>
+      </div>
+
+      {/* Active Persons Count */}
+      <div className="flex items-center justify-between p-3 bg-active/20 rounded-lg border border-active/30">
+        <span className="text-sm text-muted-foreground">{t(lang, 'activePersons')}</span>
+        <span className="font-mono text-lg font-semibold text-active">{activePersonsCount}</span>
       </div>
 
       {/* Sensitivity Slider */}

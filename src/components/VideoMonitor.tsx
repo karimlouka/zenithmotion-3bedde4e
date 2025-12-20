@@ -12,7 +12,7 @@ interface VideoMonitorProps {
   inactivityThreshold: number;
   isMuted: boolean;
   isCameraActive: boolean;
-  onPersonsChange: (count: number) => void;
+  onPersonsChange: (count: number, activeCount: number) => void;
   onCameraError: () => void;
 }
 
@@ -45,8 +45,9 @@ export const VideoMonitor: React.FC<VideoMonitorProps> = ({
 
   // Update persons count
   useEffect(() => {
-    onPersonsChange(persons.length);
-  }, [persons.length, onPersonsChange]);
+    const activeCount = persons.filter(p => p.isActive).length;
+    onPersonsChange(persons.length, activeCount);
+  }, [persons, onPersonsChange]);
 
   // Detection loop
   const runDetection = useCallback(async () => {
