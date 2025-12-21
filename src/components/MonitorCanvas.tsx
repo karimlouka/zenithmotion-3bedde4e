@@ -54,9 +54,9 @@ export const MonitorCanvas: React.FC<MonitorCanvasProps> = ({
 
         // Draw glow effect
         ctx.shadowColor = glowColor;
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = 12;
         ctx.strokeStyle = boxColor;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 3;
         ctx.strokeRect(x, y, width, height);
 
         // Reset shadow for text
@@ -96,8 +96,8 @@ export const MonitorCanvas: React.FC<MonitorCanvasProps> = ({
         ctx.fillText(labelText, badgeX + badgeWidth / 2, badgeY + badgeHeight / 2);
 
         // Corner accents
-        const cornerSize = 8;
-        ctx.lineWidth = 1.5;
+        const cornerSize = 12;
+        ctx.lineWidth = 3;
         ctx.strokeStyle = boxColor;
 
         // Top-left corner
