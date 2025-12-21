@@ -54,9 +54,9 @@ export const MonitorCanvas: React.FC<MonitorCanvasProps> = ({
 
         // Draw glow effect
         ctx.shadowColor = glowColor;
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = 8;
         ctx.strokeStyle = boxColor;
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 1.5;
         ctx.strokeRect(x, y, width, height);
 
         // Reset shadow for text
@@ -68,25 +68,25 @@ export const MonitorCanvas: React.FC<MonitorCanvasProps> = ({
         const statusText = isActive ? t(lang, 'active') : t(lang, 'inactive');
         const labelText = `${statusText}: ${timeText}`;
 
-        ctx.font = 'bold 14px "JetBrains Mono", monospace';
+        ctx.font = 'bold 11px "JetBrains Mono", monospace';
         const textMetrics = ctx.measureText(labelText);
-        const padding = 8;
-        const badgeHeight = 24;
+        const padding = 5;
+        const badgeHeight = 18;
         const badgeWidth = textMetrics.width + padding * 2;
 
         // Position badge above box
         const badgeX = x + (width - badgeWidth) / 2;
-        const badgeY = y - badgeHeight - 8;
+        const badgeY = y - badgeHeight - 5;
 
         // Badge background
         ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
         ctx.beginPath();
-        ctx.roundRect(badgeX, badgeY, badgeWidth, badgeHeight, 4);
+        ctx.roundRect(badgeX, badgeY, badgeWidth, badgeHeight, 3);
         ctx.fill();
 
         // Badge border
         ctx.strokeStyle = boxColor;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1;
         ctx.stroke();
 
         // Badge text
@@ -96,8 +96,8 @@ export const MonitorCanvas: React.FC<MonitorCanvasProps> = ({
         ctx.fillText(labelText, badgeX + badgeWidth / 2, badgeY + badgeHeight / 2);
 
         // Corner accents
-        const cornerSize = 15;
-        ctx.lineWidth = 3;
+        const cornerSize = 8;
+        ctx.lineWidth = 1.5;
         ctx.strokeStyle = boxColor;
 
         // Top-left corner
