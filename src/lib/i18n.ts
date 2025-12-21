@@ -3,7 +3,7 @@ export type Language = 'en' | 'fr' | 'ar';
 export const languageFlags: Record<Language, string> = {
   en: '🇬🇧',
   fr: '🇫🇷',
-  ar: '🇸🇦',
+  ar: '🇩🇿',
 };
 
 export const translations = {
