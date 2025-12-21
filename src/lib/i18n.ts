@@ -1,9 +1,9 @@
 export type Language = 'en' | 'fr' | 'ar';
 
 export const languageFlags: Record<Language, string> = {
-  en: '🇬🇧',
-  fr: '🇫🇷',
-  ar: '🇩🇿',
+  en: 'https://flagcdn.com/w40/gb.png',
+  fr: 'https://flagcdn.com/w40/fr.png',
+  ar: 'https://flagcdn.com/w40/dz.png',
 };
 
 export const translations = {
