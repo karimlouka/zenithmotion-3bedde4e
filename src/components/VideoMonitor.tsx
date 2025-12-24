@@ -12,6 +12,7 @@ interface VideoMonitorProps {
   inactivityThreshold: number;
   isMuted: boolean;
   isCameraActive: boolean;
+  selectedCameraId: string | null;
   onPersonsChange: (count: number, activeCount: number) => void;
   onCameraError: () => void;
 }
@@ -22,6 +23,7 @@ export const VideoMonitor: React.FC<VideoMonitorProps> = ({
   inactivityThreshold,
   isMuted,
   isCameraActive,
+  selectedCameraId,
   onPersonsChange,
   onCameraError,
 }) => {
@@ -62,12 +64,21 @@ export const VideoMonitor: React.FC<VideoMonitorProps> = ({
     const startCamera = async () => {
       try {
         setCameraError(null);
+        
+        const videoConstraints: MediaTrackConstraints = {
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+        };
+        
+        // Use selected camera if available
+        if (selectedCameraId) {
+          videoConstraints.deviceId = { exact: selectedCameraId };
+        } else {
+          videoConstraints.facingMode = 'user';
+        }
+        
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            width: { ideal: 1280 },
-            height: { ideal: 720 },
-            facingMode: 'user',
-          },
+          video: videoConstraints,
         });
         streamRef.current = stream;
         if (videoRef.current) {
@@ -104,7 +115,7 @@ export const VideoMonitor: React.FC<VideoMonitorProps> = ({
     return () => {
       stopCamera();
     };
-  }, [isCameraActive, lang, onCameraError, runDetection]);
+  }, [isCameraActive, selectedCameraId, lang, onCameraError, runDetection]);
 
   // Restart detection when sensitivity changes
   useEffect(() => {

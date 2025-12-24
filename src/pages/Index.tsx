@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { VideoMonitor } from '@/components/VideoMonitor';
 import { ControlPanel } from '@/components/ControlPanel';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import { CameraSelector } from '@/components/CameraSelector';
 import type { Language } from '@/lib/i18n';
 import { t, isRTL } from '@/lib/i18n';
 import { Eye, Users, Bell } from 'lucide-react';
@@ -15,6 +16,7 @@ const Index: React.FC = () => {
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [personsCount, setPersonsCount] = useState(0);
   const [activePersonsCount, setActivePersonsCount] = useState(0);
+  const [selectedCameraId, setSelectedCameraId] = useState<string | null>(null);
 
   const rtl = isRTL(lang);
 
@@ -84,12 +86,19 @@ const Index: React.FC = () => {
         <div className="grid lg:grid-cols-[1fr_320px] gap-6">
           {/* Video Monitor */}
           <div className="space-y-4">
+            <CameraSelector
+              lang={lang}
+              selectedDeviceId={selectedCameraId}
+              onDeviceChange={setSelectedCameraId}
+              disabled={isCameraActive}
+            />
             <VideoMonitor
               lang={lang}
               sensitivity={sensitivity}
               inactivityThreshold={inactivityThreshold}
               isMuted={isMuted}
               isCameraActive={isCameraActive}
+              selectedCameraId={selectedCameraId}
               onPersonsChange={(count, activeCount) => {
                 setPersonsCount(count);
                 setActivePersonsCount(activeCount);
