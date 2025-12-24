@@ -33,6 +33,8 @@ export const translations = {
     footer: 'Zenith Motion — AI Workforce Activity Tracking',
     cameraError: 'Camera access denied',
     modelError: 'Failed to load detection model',
+    camera: 'Camera',
+    selectCamera: 'Select Camera',
   },
   fr: {
     title: 'Zenith Motion',
@@ -60,6 +62,8 @@ export const translations = {
     footer: 'Zenith Motion — Suivi d\'Activité par IA',
     cameraError: 'Accès caméra refusé',
     modelError: 'Échec du chargement du modèle',
+    camera: 'Caméra',
+    selectCamera: 'Sélectionner Caméra',
   },
   ar: {
     title: 'زينيث موشن',
@@ -87,6 +91,8 @@ export const translations = {
     footer: 'زينيث موشن — تتبع نشاط بالذكاء الاصطناعي',
     cameraError: 'تم رفض الوصول إلى الكاميرا',
     modelError: 'فشل تحميل نموذج الكشف',
+    camera: 'كاميرا',
+    selectCamera: 'اختر الكاميرا',
   },
 } as const;
 
