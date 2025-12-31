@@ -48,15 +48,16 @@ export const MonitorCanvas: React.FC<MonitorCanvasProps> = ({
         const [x, y, width, height] = person.bbox;
         const isActive = person.isActive;
 
-        // Box styling
-        const boxColor = isActive ? '#22c55e' : '#3b82f6';
-        const glowColor = isActive ? 'rgba(34, 197, 94, 0.4)' : 'rgba(59, 130, 246, 0.4)';
+        // Box styling - red for inactive, green for active
+        const boxColor = isActive ? '#22c55e' : '#ef4444';
+        const glowColor = isActive ? 'rgba(34, 197, 94, 0.4)' : 'rgba(239, 68, 68, 0.5)';
+        const lineWidth = isActive ? 3 : 5;
 
         // Draw glow effect
         ctx.shadowColor = glowColor;
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = isActive ? 12 : 18;
         ctx.strokeStyle = boxColor;
-        ctx.lineWidth = 3;
+        ctx.lineWidth = lineWidth;
         ctx.strokeRect(x, y, width, height);
 
         // Reset shadow for text
