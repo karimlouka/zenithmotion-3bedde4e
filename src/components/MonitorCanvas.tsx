@@ -49,8 +49,8 @@ export const MonitorCanvas: React.FC<MonitorCanvasProps> = ({
         const isActive = person.isActive;
 
         // Box styling
-        const boxColor = isActive ? '#22c55e' : '#ef4444';
-        const glowColor = isActive ? 'rgba(34, 197, 94, 0.4)' : 'rgba(239, 68, 68, 0.4)';
+        const boxColor = isActive ? '#22c55e' : '#3b82f6';
+        const glowColor = isActive ? 'rgba(34, 197, 94, 0.4)' : 'rgba(59, 130, 246, 0.4)';
 
         // Draw glow effect
         ctx.shadowColor = glowColor;
